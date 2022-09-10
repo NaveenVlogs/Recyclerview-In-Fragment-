@@ -1,0 +1,205 @@
+//Fragment implements Recyclerview
+
+//(HomeActivity)
+	code..
+ getSupportFragmentManager().beginTransaction().replace(R.id.framlayout,new fragment1()).commit();
+
+//the create blank fragment as according to you
+
+//HomeFragment code
+
+
+public class fragment1 extends Fragment {
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2
+
+
+ RecyclerView recyclerview;
+    ArrayList<Datamodel>dataholders;
+
+//oncreate
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+      View viwe =  inflater.inflate(R.layout.fragment_fragment1, container, false);
+      recyclerview= viwe.findViewById(R.id.recview);
+
+//      recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+      dataholders = new ArrayList<>();
+		
+
+      Datamodel ob1 = new Datamodel(R.drawable.man,"man","man processicing");
+      dataholders.add(ob1);
+        Datamodel ob2 = new Datamodel(R.drawable.smile,"smile","smile processicing");
+        dataholders.add(ob2);
+        Datamodel ob3 = new Datamodel(R.drawable.mobile,"mobile","mobile processicing");
+        dataholders.add(ob3);
+        Datamodel ob4 = new Datamodel(R.drawable.profile,"profile","profile processicing");
+        dataholders.add(ob4);
+        Datamodel ob5 = new Datamodel(R.drawable.mind,"mind","mind processicing");
+        dataholders.add(ob5);
+
+        recyclerview.setAdapter(new MyAdapter(dataholders));
+      return viwe;
+    }
+
+
+//create adapter class in java
+
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyviewHolder> {
+    ArrayList<Datamodel>model;
+
+    public MyAdapter(ArrayList<Datamodel> model) {
+        this.model = model;
+    }
+
+    @NonNull
+    @Override
+    public MyviewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_desgine,parent,false);
+        return  new MyviewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull  MyAdapter.MyviewHolder holder, int position) {
+       holder.image1.setImageResource(model.get(position).getImage());
+       holder.textone.setText(model.get(position).getHeder());
+       holder.texttwo.setText(model.get(position).getDedc());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return model.size();
+    }
+
+    class MyviewHolder extends RecyclerView.ViewHolder {
+
+        ImageView image1;
+        TextView textone,texttwo;
+        public MyviewHolder(@NonNull  View itemView) {
+            super(itemView);
+            image1=itemView.findViewById(R.id.image1);
+            texttwo = itemView.findViewById(R.id.texttwo);
+           textone = itemView.findViewById(R.id.textone);
+        }
+
+    }
+}
+
+
+//create desgine activity single row
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="5dp"
+        android:background="#74F4F3"
+        >
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image1"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="demo text"
+         android:layout_below="@id/image1"
+            android:gravity="center"
+
+            android:id="@+id/textone"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="demo text"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_below="@id/textone"
+            android:id="@+id/texttwo"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
+
+// create model class according to your 
+
+
+public class Datamodel {
+    int image;
+    String heder,dedc;
+
+    public Datamodel() {
+    }
+
+    public Datamodel(int image, String heder, String dedc) {
+        this.image = image;
+        this.heder = heder;
+        this.dedc = dedc;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public String getHeder() {
+        return heder;
+    }
+
+    public void setHeder(String heder) {
+        this.heder = heder;
+    }
+
+    public String getDedc() {
+        return dedc;
+    }
+
+    public void setDedc(String dedc) {
+        this.dedc = dedc;
+    }
+}
+
+// paste all images which you want to show in recyclerview 
+
+
+
+
